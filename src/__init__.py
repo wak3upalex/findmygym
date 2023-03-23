@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -12,7 +11,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:asdf@localhost/po
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 jwt = JWTManager(app)
-login_manager = LoginManager(app)
 db = SQLAlchemy(app)
 
 

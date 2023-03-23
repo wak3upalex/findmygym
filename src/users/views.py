@@ -1,17 +1,12 @@
 from flask import render_template, request, jsonify, url_for, redirect, Blueprint
-from flask_login import login_user, login_required, logout_user
+from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import IntegrityError
 
-from src import db, login_manager
+from src import db
 from src.models import User
 
 
 users = Blueprint('users', __name__)
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 
 @users.route('/register', methods=['GET', 'POST'])
@@ -26,11 +21,12 @@ def register():
         try:
             db.session.add(user)
             db.session.commit()
-            login_user(user)
-            return redirect(url_for('users.login'))
+            access_token = user.generate_access_token()
+            return jsonify({'user': user.to_dict(), 'access_token': access_token}), 201, \
+                {'Authorization': 'Bearer ' + access_token}
         except IntegrityError:
             db.session.rollback()
-            return jsonify({'error': 'Email address already exists'})
+            return jsonify({'error': 'Email address already exists'}), 400
         finally:
             db.session.close()
     else:
@@ -44,8 +40,8 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
         if user and user.check_password(password):
-            login_user(user)
-            return redirect(url_for('user_profile.profile'))
+            access_token = user.generate_access_token()
+            return redirect(url_for('user_profile.profile', access_token=access_token))
         else:
             return jsonify({'error': 'Invalid email or password'})
     else:
@@ -53,7 +49,6 @@ def login():
 
 
 @users.route('/logout')
-@login_required
+@jwt_required()
 def logout():
-    logout_user()
     return redirect(url_for('main.index'))
