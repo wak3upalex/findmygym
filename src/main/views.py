@@ -1,9 +1,8 @@
-from flask import render_template, Blueprint
-
+from flask import Blueprint, jsonify
 
 main = Blueprint('main', __name__)
 
 
 @main.route('/')
 def index():
-    return render_template('main.html')
+    return jsonify({'message': 'main page'})

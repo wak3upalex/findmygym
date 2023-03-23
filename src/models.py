@@ -7,20 +7,22 @@ from src import db, jwt
 
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'allUsers'
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
     phone = db.Column(db.Text)
     email = db.Column(db.Text, unique=True)
+    occupation = db.Column(db.Text)
     password = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, first_name, last_name, phone, email, password):
+    def __init__(self, first_name, last_name, phone, email, occupation, password):
         self.first_name = first_name
         self.last_name = last_name
         self.phone = phone
         self.email = email
+        self.occupation = occupation
         self.password = generate_password_hash(password)
 
     def __repr__(self):
@@ -30,7 +32,7 @@ class User(db.Model):
         return check_password_hash(self.password, password)
 
     def generate_access_token(self):
-        return create_access_token(identity=self.id)
+        return create_access_token(identity=self.email)
 
     def to_dict(self):
         return {
@@ -39,6 +41,7 @@ class User(db.Model):
             'last_name': self.last_name,
             'phone': self.phone,
             'email': self.email,
+            'occupation': self.occupation,
             'created_at': self.created_at.isoformat()
         }
 
