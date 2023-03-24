@@ -1,6 +1,6 @@
 import flask
 from flask import request, jsonify, Blueprint
-from flask_jwt_extended import unset_jwt_cookies
+from flask_jwt_extended import unset_jwt_cookies, jwt_required
 from sqlalchemy.exc import IntegrityError
 
 from src import db
@@ -19,16 +19,10 @@ def register():
     password = flask.request.json['password']
     user = User(first_name=first_name, last_name=last_name, phone=phone,
                 email=email, occupation=occupation, password=password)
-    try:
-        db.session.add(user)
-        db.session.commit()
-        access_token = user.generate_access_token()
-        return jsonify(access_token=access_token)
-    except IntegrityError:
-        db.session.rollback()
-        return jsonify({'error': 'Email address already exists'}), 400
-    finally:
-        db.session.close()
+    db.session.add(user)
+    db.session.commit()
+    access_token = user.generate_access_token()
+    return jsonify(access_token=access_token)
 
 
 @users.route('/login', methods=['POST'])
@@ -41,9 +35,3 @@ def login():
         return jsonify(access_token=access_token)
     else:
         return jsonify({'error': 'Invalid email or password'})
-
-
-@users.route('/logout', methods=['GET'])
-def logout():
-    unset_jwt_cookies()
-    return jsonify({'message': 'Logout successful'})

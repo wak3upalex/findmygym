@@ -12,7 +12,7 @@ class User(db.Model):
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
     phone = db.Column(db.Text)
-    email = db.Column(db.Text, unique=True)
+    email = db.Column(db.Text)
     occupation = db.Column(db.Text)
     password = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -26,13 +26,13 @@ class User(db.Model):
         self.password = generate_password_hash(password)
 
     def __repr__(self):
-        return f"<User(email='{self.email}')>"
+        return f"<User(email='{self.id}')>"
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
     def generate_access_token(self):
-        return create_access_token(identity=self.email)
+        return create_access_token(identity=self.id)
 
     def to_dict(self):
         return {
@@ -44,13 +44,3 @@ class User(db.Model):
             'occupation': self.occupation,
             'created_at': self.created_at.isoformat()
         }
-
-    @staticmethod
-    @jwt.user_identity_loader
-    def user_identity_lookup(user_id):
-        return user_id
-
-    @staticmethod
-    @jwt.user_lookup_loader
-    def user_loader_callback(identity):
-        return User.query.get(identity)
