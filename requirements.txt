@@ -1,0 +1,5 @@
+Flask==2.2.3
+Flask_JWT_Extended==4.4.4
+flask_sqlalchemy==3.0.3
+SQLAlchemy==2.0.6
+Werkzeug==2.2.3
