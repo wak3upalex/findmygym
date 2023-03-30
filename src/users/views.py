@@ -1,15 +1,11 @@
 import flask
-from flask import request, jsonify, Blueprint
-from flask_jwt_extended import unset_jwt_cookies, jwt_required
-from sqlalchemy.exc import IntegrityError
+from flask import jsonify, Blueprint
 
-from src import db
+from src import db, app
 from src.models import User
 
-users = Blueprint('users', __name__)
 
-
-@users.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def register():
     first_name = flask.request.json['first_name']
     last_name = flask.request.json['last_name']
@@ -25,7 +21,7 @@ def register():
     return jsonify(access_token=access_token)
 
 
-@users.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     email = flask.request.json['email']
     password = flask.request.json['password']
