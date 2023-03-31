@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify
 
-main = Blueprint('main', __name__)
+from src import app
 
 
-@main.route('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
     return jsonify({'message': 'main page'})
