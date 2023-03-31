@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 
@@ -9,7 +10,9 @@ app.config.from_object(Config)
 
 jwt = JWTManager(app)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
+from .models import User
 with app.app_context():
     db.create_all()
 

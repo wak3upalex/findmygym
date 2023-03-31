@@ -8,17 +8,17 @@ services:
     depends_on:
       - db
     environment:
-      FLASK_APP: manage.py
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: asdf
-      POSTGRES_DB: db_fmg
-      POSTGRES_HOST: db
+      FLASK_APP: ${FLASK_APP}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
     command: bash -c "flask db upgrade && flask run --host 0.0.0.0"
   db:
     image: postgres
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: asdf
-      POSTGRES_DB: db_fmg
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"

@@ -2,4 +2,5 @@ Flask==2.2.3
 Flask_JWT_Extended==4.4.4
 flask_sqlalchemy==3.0.3
 Werkzeug==2.2.3
+flask-migrate==4.0.4
 psycopg2-binary==2.9.1
