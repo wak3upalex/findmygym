@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      FLASK_APP: manage.py
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: asdf
+      POSTGRES_DB: db_fmg
+      POSTGRES_HOST: db
+    command: bash -c "flask db upgrade && flask run --host 0.0.0.0"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: asdf
+      POSTGRES_DB: db_fmg
+    ports:
+      - "5432:5432"
