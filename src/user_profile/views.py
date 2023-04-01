@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from src import app
@@ -10,4 +10,4 @@ from src.models import User
 def profile():
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
-    return jsonify(user.to_dict())
+    return jsonify(user.json)
