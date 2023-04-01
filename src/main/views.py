@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import jsonify
 
 from src import app
 
