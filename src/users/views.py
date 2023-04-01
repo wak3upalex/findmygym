@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, Blueprint
+from flask import jsonify
 
 from src import db, app
 from src.models import User
@@ -11,10 +11,9 @@ def register():
     last_name = flask.request.json['last_name']
     phone = flask.request.json['phone']
     email = flask.request.json['email']
-    occupation = flask.request.json['occupation']
     password = flask.request.json['password']
     user = User(first_name=first_name, last_name=last_name, phone=phone,
-                email=email, occupation=occupation, password=password)
+                info="No Info about User", email=email, password=password)
     db.session.add(user)
     db.session.commit()
     access_token = user.generate_access_token()
