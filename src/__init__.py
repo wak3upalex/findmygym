@@ -6,12 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from .config import Config
 
 app = Flask(__name__)
-# app.config.from_object(Config)
-app.config['SECRET_KEY'] = 'ba57af1c9a3db8b3c03e001c270dfce5'
-app.config['JWT_SECRET_KEY'] = '9232f7ebb9487add64be849a2abeb0d4'
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@db/gym_db'  # Config.SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(Config)
 
 jwt = JWTManager(app)
 db = SQLAlchemy(app)
