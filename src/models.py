@@ -1,13 +1,11 @@
 from datetime import datetime
-
-from flask_jwt_extended import create_access_token
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from flask_jwt_extended import create_access_token
 from src import db
 
 
 class User(db.Model):
-    __tablename__ = 'allUsers'
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(30))
