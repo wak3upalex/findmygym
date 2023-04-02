@@ -53,9 +53,9 @@ def change_password():
     confirm_old = handle['confirm_old']
     new_pass = handle['new_pass']
     confirm_new = handle['confirm_new']
-    if old_pass is not confirm_old:
+    if old_pass != confirm_old:
         return jsonify({'message': 'old passwords are not the same'})
-    if new_pass is not confirm_new:
+    if new_pass != confirm_new:
         return jsonify({'message': 'new passwords are not the same'})
     if user:
         if user.check_password(old_pass):
