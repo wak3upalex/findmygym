@@ -1,5 +1,5 @@
 /***    General     ***/
-* {
+/** {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -26,18 +26,17 @@ body {
     transition: all .5s;
     cursor: pointer;
     text-transform: capitalize
-}
+}*/
 
 /***    Landing Page     ***/
-.main-title,
+/*.main-title,
 .main-para {
-    color: #f1f1f1
+    color: #000000
 }
 
 .main-title {
     padding-top: 10rem;
     font-size: 5rem;
-    font-family: 'Fascinate', cursive;
     text-transform: uppercase
 }
 
@@ -68,10 +67,10 @@ body {
 #reg_btn:hover span:after {
   opacity: 1;
   right: 0;
-}
+}*/
 
 /***    Login Page     ***/
-h2 {
+/*h2 {
     font-weight: 300
 }
 
@@ -96,13 +95,17 @@ form label {
     cursor: pointer
 }
 
+.custom-input {
+    border-radius: 30px;
+}
+
 input {
     width: 15rem;
     padding: .3rem;
-    border-radius: 5px;
     outline: none;
     border: none
 }
+
 
 #sub_btn {
     display: block;
@@ -122,10 +125,10 @@ input {
 footer p {
     margin: 0;
     font-size: .9rem
-}
+}*/
 
 /***    Register Page     ***/
-#checkbox {
+/*#checkbox {
     width: 1rem
 }
 
@@ -135,9 +138,9 @@ form span {
 
 #reset_pass_lbl {
     float: left
-}
+}*/
 
 /***    Home Page     ***/
-.home-page-title {
+/*.home-page-title {
     color: #222
-}
+}*/
