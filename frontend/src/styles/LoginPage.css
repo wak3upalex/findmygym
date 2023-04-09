@@ -1,16 +1,23 @@
-.form-control:focus {
-    border-color: #A33131;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
-}
-
+/*
 .btn-style {
+    width: 100px;
+    height: 35px;
+    border: 1px;
     border-color: #8a2a2a;
+    border-radius: 3px;
     background-color: #A33131;
+    color: #ffffff;
+    font-family: roboto;
 }
 
     .btn-style:hover {
         border-color: #8a2a2a;
         background-color: #8a2a2a;
+    }
+
+    .form-control:focus {
+        border-color: #A33131;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
     }
 
 .float-end {
@@ -19,8 +26,4 @@
 
     .float-end:hover {
         color: #8a2a2a;
-    }
-
-.form-control {
-    border-radius: 3px 3px;
-}
+    }*/

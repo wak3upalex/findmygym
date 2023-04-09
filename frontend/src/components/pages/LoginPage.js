@@ -1,9 +1,18 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import '../../styles/LoginPage.css'
 
 export default function SignInPage() {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		axios.post('/login', { email, password })
+	}
+
     return (
 		<section class="h-100">
 			<div class="container h-100">
@@ -15,10 +24,10 @@ export default function SignInPage() {
 						<div class="card shadow-lg">
 							<div class="card-body p-5">
 								<h1 class="fs-4 card-title fw-bold mb-4">Вход</h1>
-								<form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+								<form method="POST" onSubmit={handleSubmit} class="needs-validation" novalidate="" autocomplete="off">
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="email">Email</label>
-										<input id="email" type="email" class="form-control" name="email" value="" required autofocus />
+										<input id="email" type="email" class="form-control" name="email" required autofocus onChange={(e) => setEmail(e.target.value)} />
 											<div class="invalid-feedback">
 												Неверная почта.
 											</div>
@@ -31,7 +40,7 @@ export default function SignInPage() {
 												Забыли пароль?
 											</a>
 										</div>
-										<input id="password" type="password" class="form-control" name="password" required />
+										<input id="password" type="password" class="form-control" name="password" required onChange={(e) => setPassword(e.target.value)} />
 											<div class="invalid-feedback">
 												Неверный пароль.
 											</div>
@@ -42,7 +51,7 @@ export default function SignInPage() {
 											<input type="checkbox" name="remember" id="remember" class="form-check-input" />
 												<label for="remember" class="form-check-label">Запомнить меня</label>
 										</div>
-										<button type="submit" class="btn btn-primary btn-style ms-auto">
+										<button type="submit" class="btn btn-primary ms-auto">
 											Войти
 										</button>
 									</div>

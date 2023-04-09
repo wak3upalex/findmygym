@@ -1,9 +1,21 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import '../../styles/LoginPage.css'
 
 export default function SignUpPage() {
+	const [name, setName] = useState('')
+	const [surname, setSurname] = useState('')
+	const [role, setRole] = useState('')
+	const [phone, setPhone] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		axios.post('/login', { name, surname, role, phone, email, password })
+	}
 
     return (
 		<section class="h-100">
@@ -16,10 +28,10 @@ export default function SignUpPage() {
 						<div class="card shadow-lg">
 							<div class="card-body p-5">
 								<h1 class="fs-4 card-title fw-bold mb-4">Регистрация</h1>
-								<form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+								<form method="POST" onSubmit={handleSubmit} class="needs-validation" novalidate="" autocomplete="off">
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="name">Имя</label>
-										<input id="name" type="text" class="form-control" name="name" value="" required autofocus />
+										<input id="name" type="text" class="form-control" name="name" required autofocus onChange={(e) => setName(e.target.value)} />
 											<div class="invalid-feedback">
 												Обязательное поле
 											</div>
@@ -27,7 +39,7 @@ export default function SignUpPage() {
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="name">Фамилия</label>
-										<input id="name" type="text" class="form-control" name="name" value="" required autofocus />
+										<input id="name" type="text" class="form-control" name="name" required onChange={(e) => setSurname(e.target.value)} />
 										<div class="invalid-feedback">
 											Обязательное поле
 										</div>
@@ -35,7 +47,7 @@ export default function SignUpPage() {
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted">Роль</label>
-										<select class="form-select" aria-label="Default select example">
+										<select class="form-select" aria-label="Default select example" onChange={(e) => setRole(e.target.value)}>
 											<option selected>Пользователь</option>
 											<option value="1">Тренер</option>
 											<option value="2">Организатор</option>
@@ -44,7 +56,7 @@ export default function SignUpPage() {
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="phone">Телефон</label>
-										<input id="phone" type="tel" class="form-control" name="phone" value="" />
+										<input id="phone" type="tel" class="form-control" name="phone" required onChange={(e) => setPhone(e.target.value)} />
 										<div class="invalid-feedback">
 											Обязательное поле
 										</div>
@@ -52,7 +64,7 @@ export default function SignUpPage() {
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="email">Email</label>
-										<input id="email" type="email" class="form-control" name="email" value="" required />
+										<input id="email" type="email" class="form-control" name="email" required onChange={(e) => setEmail(e.target.value)} />
 											<div class="invalid-feedback">
 												Обязательное поле
 											</div>
@@ -60,7 +72,7 @@ export default function SignUpPage() {
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="password">Пароль</label>
-										<input id="password" type="password" class="form-control" name="password" required />
+										<input id="password" type="password" class="form-control" name="password" required onChange={(e) => setPassword(e.target.value)} />
 											<div class="invalid-feedback">
 												Обязательное поле
 											</div>
