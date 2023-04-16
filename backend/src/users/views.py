@@ -1,11 +1,13 @@
 import flask
 from flask import jsonify
+from flask_cors import CORS, cross_origin
 
 from src import app, db
 from src.models import User, Coach
 
 
 @app.route('/register', methods=['POST'])
+@cross_origin()
 def register():
     handle = flask.request.json
     first_name = handle['first_name']
@@ -35,6 +37,7 @@ def register():
 
 
 @app.route('/login', methods=['POST'])
+@cross_origin()
 def login():
     email = flask.request.json['email']
     password = flask.request.json['password']

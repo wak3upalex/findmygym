@@ -5,16 +5,41 @@ import axios from 'axios'
 import '../../styles/LoginPage.css'
 
 export default function SignUpPage() {
-	const [name, setName] = useState('')
-	const [surname, setSurname] = useState('')
-	const [role, setRole] = useState('')
+	const [first_name, setName] = useState('')
+	const [last_name, setSurname] = useState('')
+	const [role, setRole] = useState('Пользователь')
+	const [user, setUser] = useState(true)
+	const [coach, setCoach] = useState(false)
 	const [phone, setPhone] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		axios.post('/login', { name, surname, role, phone, email, password })
+		axios.post('http://localhost:5000/register', { first_name, last_name, phone, email, password, user, coach }, {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		.then((response) => {
+			console.log('Успешная регистрация:', response.data)
+			// здесь можно добавить код для перенаправления на другую страницу или для обновления состояния приложения
+		})
+		.catch((error) => {
+			console.error('Ошибка регистрации:', error)
+			// здесь можно добавить код для обработки ошибок, например, для вывода сообщения об ошибке на экране
+		})
+	}
+
+	const handleRoleChange = (e) => {
+		setRole(e.target.value)
+		if (e.target.value === 'Пользователь') {
+			setUser(true)
+			setCoach(false)
+		} else if (e.target.value === 'Тренер') {
+			setUser(false)
+			setCoach(true)
+		}
 	}
 
     return (
@@ -31,7 +56,7 @@ export default function SignUpPage() {
 								<form method="POST" onSubmit={handleSubmit} class="needs-validation" novalidate="" autocomplete="off">
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="name">Имя</label>
-										<input id="name" type="text" class="form-control" name="name" required autofocus onChange={(e) => setName(e.target.value)} />
+										<input id="first_name" type="text" class="form-control" name="first_name" required autofocus onChange={(e) => setName(e.target.value)} />
 											<div class="invalid-feedback">
 												Обязательное поле
 											</div>
@@ -39,7 +64,7 @@ export default function SignUpPage() {
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted" for="name">Фамилия</label>
-										<input id="name" type="text" class="form-control" name="name" required onChange={(e) => setSurname(e.target.value)} />
+										<input id="last_name" type="text" class="form-control" name="last_name" required onChange={(e) => setSurname(e.target.value)} />
 										<div class="invalid-feedback">
 											Обязательное поле
 										</div>
@@ -47,10 +72,9 @@ export default function SignUpPage() {
 
 									<div class="mb-3">
 										<label class="mb-2 text-muted">Роль</label>
-										<select class="form-select" aria-label="Default select example" onChange={(e) => setRole(e.target.value)}>
+										<select class="form-select" aria-label="Default select example" onChange={ handleRoleChange }>
 											<option selected>Пользователь</option>
 											<option value="1">Тренер</option>
-											<option value="2">Организатор</option>
 										</select>
 									</div> 
 

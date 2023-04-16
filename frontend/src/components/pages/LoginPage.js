@@ -10,7 +10,19 @@ export default function SignInPage() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		axios.post('/login', { email, password })
+		axios.post('http://localhost:5000/login', { email, password }, {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		.then((response) => {
+			console.log('Успешная авторизация:', response.data)
+				// здесь можно добавить код для перенаправления на другую страницу или для обновления состояния приложения
+		})
+		.catch((error) => {
+			console.error('Ошибка авторизации:', error)
+			// здесь можно добавить код для обработки ошибок, например, для вывода сообщения об ошибке на экране
+		})
 	}
 
     return (
