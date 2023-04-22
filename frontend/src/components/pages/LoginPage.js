@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-import '../../styles/LoginPage.css'
+import '../../styles/LoginPage.scss'
 
 export default function SignInPage() {
 	const [email, setEmail] = useState('')
