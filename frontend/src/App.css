@@ -1,7 +1,54 @@
-:root {
-    --primary-color: #000000;
+.form-control:focus {
+    border-color: #FAFE28;
+    box-shadow: 0 0 0 0.2rem rgba(250, 254, 40, 0.25);
+}
+
+.form-select:focus {
+    border-color: #FAFE28;
+    box-shadow: 0 0 0 0.2rem rgba(250, 254, 40, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: #FAFE28;
+    border-color: #FAFE28;
+}
+
+.form-check-input:focus {
+    border-color: #FAFE28;
+    box-shadow: 0 0 0 0.2rem rgba(250, 254, 40, 0.25);
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    --bs-btn-color: #FFFFFF;
+    --bs-btn-bg: #1D1E18;
+    --bs-btn-border-color: #1D1E18;
+    --bs-btn-hover-color: #1D1E18;
+    --bs-btn-hover-bg: #FAFE28;
+    --bs-btn-hover-border-color: #FAFE28;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #1D1E18;
+    --bs-btn-active-bg: #FAFE28;
+    --bs-btn-active-border-color: #FAFE28;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #FFFFFF;
+    --bs-btn-disabled-bg: #1D1E18;
+    --bs-btn-disabled-border-color: #1D1E18;
 }
+
+.link-primary {
+    color: #1D1E18;
+    -webkit-text-decoration-color: #FAFE28;
+    text-decoration-color: #FAFE28;
+}
+
+    .link-primary:hover {
+        color: #1D1E18;
+        -webkit-text-decoration-color: #FAFE28;
+        text-decoration-color: #FAFE28;
+    }
+
+    .link-primary:focus {
+        color: #1D1E18;
+        -webkit-text-decoration-color: #FAFE28;
+        text-decoration-color: #FAFE28;
+    }

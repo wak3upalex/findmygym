@@ -46,9 +46,7 @@ export default function SignInPage() {
 									<div class="mb-3">
 										<div class="mb-2 w-100">
 											<label class="text-muted" for="password">Пароль</label>
-											<a href="" class="float-end">
-												Забыли пароль?
-											</a>
+											<Link to="" class="float-end link-primary">Забыли пароль?</Link>
 										</div>
 										<input id="password" type="password" class="form-control" name="password" required onChange={(e) => setPassword(e.target.value)} />
 											<div class="invalid-feedback">
