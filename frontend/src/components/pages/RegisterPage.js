@@ -2,8 +2,6 @@
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-import '../../styles/LoginPage.css'
-
 export default function SignUpPage() {
 	const [first_name, setName] = useState('')
 	const [last_name, setSurname] = useState('')
